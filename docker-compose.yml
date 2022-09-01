@@ -8,7 +8,7 @@ services:
       POSTGRES_DB: "thanks-bank"  #postgresのDatabase名
       POSTGRES_USER: "postgres_user"  #postgresのユーザー名
       POSTGRES_PASSWORD: "postgres_pass"  #postgresのパスワード
-      PGDATA: /var/lib/postgresql/data  #保存場所
+      PGDATA: /var/lib/postgresql/data  #保存場所のパス
     volumes:
       - postgres-data:/var/lib/postgresql/data
     ports:

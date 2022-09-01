@@ -40,6 +40,12 @@ dependencies {
 
     implementation("com.h2database:h2:$h2_version")
     implementation("com.zaxxer:HikariCP:$hikaricp_version")
-    implementation("org.jetbrains.exposed:exposed:$exposed_version")
+    implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
+    implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
+    implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
+//    implementation("org.jetbrains.exposed:exposed-java-time:$exposed_version")
+    implementation("org.jetbrains.exposed:exposed-jodatime:$exposed_version")
     implementation("org.postgresql:postgresql:$postgres_version")
+
+    implementation("joda-time:joda-time:2.11.1")
 }
