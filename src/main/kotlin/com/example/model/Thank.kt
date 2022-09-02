@@ -77,6 +77,7 @@ object ThanksTable: IntIdTable(name = "thanks") {
     }
 }
 
+//thankを生成するために使用するクラス
 data class ThankRequest(
     val slackUserId: String,
     val body: String,

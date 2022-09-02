@@ -3,11 +3,11 @@ package com.example.module
 import com.slack.api.bolt.App
 import com.slack.api.bolt.response.Response
 import com.slack.api.model.kotlin_extension.view.blocks
-import com.slack.api.model.view.View
 import com.slack.api.model.view.Views
 import io.ktor.server.application.*
 
 
+//Slackで/thanks入力するとメッセージを作成するウィンドウを開く
 fun Application.slackCommand(app: App) {
 
     //Boltアプリは SlackAPIサーバーからのリクエストに対して3秒以内にack()メソッドで応答する必要がある

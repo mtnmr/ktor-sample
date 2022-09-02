@@ -27,7 +27,7 @@ object UsersTable: IntIdTable(name="users"){
 
     //slackUserIdからUserを取得する
     fun getUserBySlackUserId(slackUserId: String): User{
-        return UsersTable.select{UsersTable.slackUserID eq slackUserId }.map {
+        return UsersTable.select{slackUserID eq slackUserId }.map {
             toUser(it)
         }.single()
     }
@@ -44,3 +44,9 @@ object UsersTable: IntIdTable(name="users"){
         )
     }
 }
+
+data class UserRequest(
+    val slackUserId: String,
+    val realName: String,
+    val userImage: String
+)

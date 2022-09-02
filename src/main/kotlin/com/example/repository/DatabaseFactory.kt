@@ -5,6 +5,8 @@ import com.example.model.ThanksTable
 import com.example.model.UsersTable
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -34,5 +36,12 @@ object DatabaseFactory {
         config.transactionIsolation = "TRANSACTION_REPEATABLE_READ"
         config.validate()
         return HikariDataSource(config)
+    }
+
+    //データベースに接続するためのクエリ関数
+    suspend fun <T> dbQuery(block:() -> T): T{
+        return withContext(Dispatchers.IO){
+            transaction { block() }
+        }
     }
 }
