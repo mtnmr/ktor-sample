@@ -5,6 +5,7 @@ val exposed_version: String by project
 val h2_version: String by project
 val hikaricp_version: String by project
 val postgres_version: String by project
+val slack_api_version: String by project
 
 plugins {
     application
@@ -48,4 +49,13 @@ dependencies {
     implementation("org.postgresql:postgresql:$postgres_version")
 
     implementation("joda-time:joda-time:2.11.1")
+
+    implementation("com.slack.api:bolt-ktor:$slack_api_version")
+    implementation("com.slack.api:slack-api-client:$slack_api_version")
+    implementation("com.slack.api:slack-api-model:$slack_api_version")
+    implementation("com.slack.api:slack-api-model-kotlin-extension:$slack_api_version")
+    implementation("com.slack.api:slack-api-client-kotlin-extension:$slack_api_version")
+    implementation("com.slack.api:bolt:$slack_api_version")
+    implementation("com.slack.api:bolt-servlet:$slack_api_version")
+    implementation("com.slack.api:bolt-jetty:$slack_api_version")
 }
