@@ -1,5 +1,6 @@
 package com.example
 
+import com.example.module.slackCommand
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import com.example.repository.DatabaseFactory
@@ -31,6 +32,8 @@ fun Application.module(testing:Boolean = false){
     slackApp.command("/hello"){req, ctx ->
         ctx.ack("Hello, World!")
     }
+
+    slackCommand(slackApp)
 
     routing {
         get("/") {
