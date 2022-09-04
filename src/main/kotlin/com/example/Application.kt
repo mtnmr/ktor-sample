@@ -1,9 +1,12 @@
 package com.example
 
 import com.example.module.slackCommand
+import com.example.module.slackViewSubmission
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import com.example.repository.DatabaseFactory
+import com.example.repository.ThankRepository
+import com.example.repository.UserRepository
 import com.slack.api.bolt.App
 import com.slack.api.bolt.AppConfig
 import com.slack.api.bolt.ktor.respond
@@ -25,6 +28,9 @@ fun main() {
 
 fun Application.module(testing:Boolean = false){
 
+    val thankRepository = ThankRepository()
+    val userRepository = UserRepository()
+
     val slackAppConfig = AppConfig()
     val slackApp = App(slackAppConfig)
     val requestParser = SlackRequestParser(slackApp.config())
@@ -34,6 +40,7 @@ fun Application.module(testing:Boolean = false){
     }
 
     slackCommand(slackApp)
+    slackViewSubmission(slackApp, thankRepository, userRepository)
 
     routing {
         get("/") {
