@@ -17,6 +17,7 @@ fun Application.slackViewSubmission(
 
     //サンクスモーダルで定義したcallbackIdをセットする
     app.viewSubmission("thanks-message"){ req, ctx ->
+        //payloadから値を取得する
         val stateValues = req.payload.view.state.values
         val message = stateValues["message-block"]?.get("message-action")?.value
         val targetUsers = stateValues["user-block"]?.get("user-action")?.selectedUsers

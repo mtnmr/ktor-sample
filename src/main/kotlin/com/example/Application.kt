@@ -1,6 +1,8 @@
 package com.example
 
 import com.example.module.slackCommand
+import com.example.module.slackMessageEvent
+import com.example.module.slackReactionEvent
 import com.example.module.slackViewSubmission
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
@@ -41,6 +43,8 @@ fun Application.module(testing:Boolean = false){
 
     slackCommand(slackApp)
     slackViewSubmission(slackApp, thankRepository, userRepository)
+    slackReactionEvent(slackApp, thankRepository)
+    slackMessageEvent(slackApp, thankRepository, userRepository)
 
     routing {
         get("/") {
@@ -51,7 +55,4 @@ fun Application.module(testing:Boolean = false){
             respond(call, slackApp.run(toBoltRequest(call, requestParser)))
         }
     }
-
-
-
 }

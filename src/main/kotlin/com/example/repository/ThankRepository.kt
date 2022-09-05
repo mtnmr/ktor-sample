@@ -1,8 +1,14 @@
 package com.example.repository
 
+import com.example.model.ThankReactionsTable
 import com.example.model.ThankRequest
 import com.example.model.ThanksTable
 import com.example.repository.DatabaseFactory.dbQuery
+import com.slack.api.model.event.MessageEvent
+import com.slack.api.model.event.ReactionAddedEvent
+import com.slack.api.model.event.ReactionRemovedEvent
+import org.jetbrains.exposed.sql.and
+import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert
 
 class ThankRepository {
@@ -13,6 +19,39 @@ class ThankRepository {
                 it[slackUserId] = thanks.slackUserId
                 it[body] = thanks.body
                 it[targetSlackUserId] = thanks.targetSlackUserId
+            }
+        }
+    }
+
+    //リアクションの保存、ReactionAddEventを使ってハンドリングする
+    suspend fun createReaction(event: ReactionAddedEvent){
+        return dbQuery {
+            ThankReactionsTable.insert {
+                it[slackUserId] = event.user
+                it[slackPostId] = event.item.ts
+                it[reactionName] = event.reaction
+            }
+        }
+    }
+
+    suspend fun removeReaction(event: ReactionRemovedEvent): Boolean{
+        return dbQuery {
+            ThankReactionsTable.deleteWhere {
+                ThankReactionsTable.slackUserId eq event.user and
+                        (ThankReactionsTable.reactionName eq event.reaction) and
+                        (ThankReactionsTable.slackPostId eq event.item.ts)
+            } > 0
+        }
+    }
+
+    //返事を保存
+    suspend fun createThankReply(event:MessageEvent){
+        return dbQuery {
+            ThanksTable.insert {
+                it[slackUserId] = event.user
+                it[body] = event.text
+                it[slackPostId] = event.ts
+                it[parentSlackPostId] = event.threadTs
             }
         }
     }
