@@ -39,7 +39,7 @@ object DatabaseFactory {
     }
 
     //データベースに接続するためのクエリ関数
-    suspend fun <T> dbQuery(block:() -> T): T{
+    suspend fun <T> dbQuery(block: () -> T): T{
         return withContext(Dispatchers.IO){
             transaction { block() }
         }

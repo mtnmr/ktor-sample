@@ -1,15 +1,15 @@
 package com.example.repository
 
+import com.example.model.Thank
 import com.example.model.ThankReactionsTable
 import com.example.model.ThankRequest
 import com.example.model.ThanksTable
+import com.example.model.ThanksTable.toThank
 import com.example.repository.DatabaseFactory.dbQuery
 import com.slack.api.model.event.MessageEvent
 import com.slack.api.model.event.ReactionAddedEvent
 import com.slack.api.model.event.ReactionRemovedEvent
-import org.jetbrains.exposed.sql.and
-import org.jetbrains.exposed.sql.deleteWhere
-import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.*
 
 class ThankRepository {
 
@@ -53,6 +53,15 @@ class ThankRepository {
                 it[slackPostId] = event.ts
                 it[parentSlackPostId] = event.threadTs
             }
+        }
+    }
+
+    //サンクス一覧の取得(ThanksRoute)
+    suspend fun getThanks():List<Thank>{
+        return dbQuery {
+            ThanksTable.select {
+                ThanksTable.parentSlackPostId.isNull()
+            }.orderBy(ThanksTable.id, SortOrder.DESC).map{ toThank(it)}
         }
     }
 }

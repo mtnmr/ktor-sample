@@ -1,0 +1,306 @@
+/* Miligram overrides */
+a {
+    color: #261818;
+    text-decoration: none;
+}
+
+.button, button, input[type='button'], input[type='reset'], input[type='submit'] {
+    background-color: #FF8080;
+    border: 0.1rem solid #FF8080;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 112.0rem;
+    padding: 0 2.0rem;
+    position: relative;
+    width: 100%;
+}
+
+.button-wide {
+    width: 100%;
+    font-size: 1.5rem;
+}
+
+.button-disabled {
+    cursor: not-allowed;
+    background-color: #606c76;
+    border-color: #606c76;
+    color: #fff;
+    outline: 0;
+}
+
+legend {
+    color: #FF8080;
+}
+
+label {
+    font-size: 1.5rem;
+    margin-bottom: 1.0rem;
+}
+
+/* Main */
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #F7F6EE;
+    color: #261818;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-size: 1.6em;
+    font-weight: 300;
+    letter-spacing: .01em;
+    line-height: 1.6;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+.main {
+    margin: 2.5rem 0;
+}
+
+.content {
+    padding: 2.0rem;
+    background: #FFFFFF;
+    border-radius: .4rem;
+    /* Thanks Stripe */
+    box-shadow: 0 7px 14px 0 rgba(60,66,87, 0.1), 0 3px 6px 0 rgba(0, 0, 0, .07);
+}
+.actions a {
+    font-weight: bold;
+    padding: 0 .4rem;
+}
+th {
+    white-space: nowrap;
+}
+
+/* Nav */
+.top-nav {
+    background: #FFFFFF;
+    width: 100%;
+}
+
+*, *:after, *:before {
+    box-sizing: inherit;
+}
+
+.top-nav-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 112.0rem;
+    padding: 2.0rem;
+    margin: 0 auto 0rem;
+}
+.top-nav-title a {
+    font-size: 2.4rem;
+    *color: #261818;
+}
+.top-nav-title span {
+    color: #FF8080;
+}
+
+.top-nav-links a {
+    margin: 0 .5rem;
+}
+.top-nav-title a,
+.top-nav-links a {
+    font-weight: bold;
+}
+
+/* Footer */
+footer {
+    margin-top: auto;
+    width: 100%;
+    background-color: #ffffff;
+    color: #261818;
+    text-align: center;
+}
+
+footer .link {
+    margin-top: 2.0rem;
+}
+
+footer .copyright {
+    margin: 1.1rem 0;
+}
+
+footer a {
+    margin: 0 .5rem;
+}
+
+/* Thanks */
+.thanks {
+    margin: 0 auto;
+    max-width: 1000px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+    gap: 20px;
+}
+
+.thanks-card {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.thanks-card-to-user {
+    display: flex;
+    font-size: 1rem;
+    align-items: center;
+    justify-content: start;
+    background: #ffffff;
+}
+
+.thanks-card-to-user img {
+    display: inline;
+    margin-left: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-radius: 20px;
+}
+
+.thanks-card-to-user p {
+    margin-left: 1rem;
+    font-weight: bold;
+}
+
+.thanks-card-content {
+    line-height: 1.5;
+    font-size: 0.9rem;
+    padding: 5px 15px 15px 15px;
+    background: #FFFFFF;
+}
+
+.thanks-card-content p {
+    word-wrap: break-word;
+}
+
+.thanks-card-content p:first-of-type {
+    margin-top: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+    height: 5rem;
+}
+
+.thanks-card-content p:last-of-type {
+    margin-bottom: 0;
+}
+
+.thanks-card-from-user {
+    padding: 15px 15px 22px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background: #FFFFFF;
+    color: #555555;
+    font-size: 0.8rem;
+    border-bottom: 2px solid #cccccc;
+}
+
+.thanks-card-from-user img {
+    border-radius: 20px;
+}
+
+.thanks-card-from-user p {
+    margin-left: 1rem;
+    font-weight: bold;
+}
+
+.thanks-card-reaction {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #FFFFFF;
+}
+
+.thanks-card-reaction p {
+    font-size: 0.8rem;
+    color: #D3D3D3;
+    margin-right: 2rem;
+    margin-left: 1.5rem;
+}
+
+/* Thanks Detail */
+.thanks-detail-message {
+    background-color: #FFFFFF;
+    padding: 15px 15px 30px 15px;
+    border-radius: 8px;
+}
+
+.thanks-detail-message-user {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    background-color: #FFFFFF;
+}
+
+.thanks-detail-message-user-from {
+    border-radius: 20px;
+}
+
+.thanks-detail-message-user-to {
+    margin-left: 1rem;
+    border-radius: 20px;
+}
+
+.thanks-detail-message-user p {
+    margin-left: 1.4rem;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #FFFFFF;
+}
+
+.thanks-detail-message-body {
+    font-size: 14px;
+    margin-top: 1rem;
+}
+
+.thanks-detail-reaction {
+    margin-top: 2rem;
+    background-color: #FFFFFF;
+    padding: 15px 15px 5px 15px;
+    border-radius: 8px;
+}
+
+.thanks-detail-reaction h2 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.thanks-detail-thread {
+    margin-top: 2rem;
+    background-color: #FFFFFF;
+    padding: 15px 15px 30px 15px;
+    border-radius: 8px;
+}
+
+.thanks-detail-thread h2 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.thanks-detail-thread-user {
+    margin-top: 2rem;
+    align-items: center;
+    justify-content: start;
+    display: flex;
+}
+
+.thanks-detail-thread-user img {
+    border-radius: 20px;
+}
+
+.thanks-detail-thread-user p {
+    margin-left: 1rem;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.thanks-detail-thread-message {
+    margin-top: 2rem;
+    font-size: 14px;
+}
