@@ -1,9 +1,7 @@
 package com.example.repository
 
-import com.example.model.Thank
-import com.example.model.ThankReactionsTable
-import com.example.model.ThankRequest
-import com.example.model.ThanksTable
+import com.example.model.*
+import com.example.model.ThankReactionsTable.toThankReaction
 import com.example.model.ThanksTable.toThank
 import com.example.repository.DatabaseFactory.dbQuery
 import com.slack.api.model.event.MessageEvent
@@ -35,7 +33,7 @@ class ThankRepository {
         }
     }
 
-    suspend fun removeReaction(event: ReactionRemovedEvent): Boolean{
+    suspend fun removeReaction(event: ReactionRemovedEvent): Boolean {
         return dbQuery {
             ThankReactionsTable.deleteWhere {
                 ThankReactionsTable.slackUserId eq event.user and
@@ -46,7 +44,7 @@ class ThankRepository {
     }
 
     //返事を保存
-    suspend fun createThankReply(event:MessageEvent){
+    suspend fun createThankReply(event: MessageEvent) {
         return dbQuery {
             ThanksTable.insert {
                 it[slackUserId] = event.user
@@ -63,6 +61,33 @@ class ThankRepository {
             ThanksTable.select {
                 ThanksTable.parentSlackPostId.isNull()
             }.orderBy(ThanksTable.id, SortOrder.DESC).map{ toThank(it)}
+        }
+    }
+
+    //サンクスの取得
+    suspend fun getThank(id: Int): Thank{
+        return dbQuery {
+            ThanksTable.select {
+                ThanksTable.id eq id
+            }.map{ toThank(it) }.single()
+        }
+    }
+
+    //リアクション一覧の取得
+    suspend fun getReactions(slackPostId: String): List<ThankReaction> {
+        return dbQuery {
+            ThankReactionsTable.select {
+                ThankReactionsTable.slackPostId eq slackPostId
+            }.map { toThankReaction(it) }
+        }
+    }
+
+    //スレッド一覧の取得
+    suspend fun getThreads(slackPostId: String): List<Thank> {
+        return dbQuery {
+            ThanksTable.select {
+                ThanksTable.parentSlackPostId eq slackPostId
+            }.map { toThank(it) }
         }
     }
 

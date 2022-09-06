@@ -13,10 +13,10 @@ fun Application.slackReactionEvent(
     thankRepository: ThankRepository
 ){
 
-    app.event(ReactionAddedEvent::class.java){ payload, ctx ->
+    app.event(ReactionAddedEvent::class.java) { payload, ctx ->
         val event = payload.event
 
-        if(event.item.channel == System.getenv("SLACK_THANKS_CHANNEL")){
+        if (event.item.channel == System.getenv("SLACK_THANKS_CHANNEL")) {
             launch {
                 thankRepository.createReaction(event)
             }
@@ -25,10 +25,10 @@ fun Application.slackReactionEvent(
         ctx.ack()
     }
 
-    app.event(ReactionRemovedEvent::class.java){ payload, ctx ->
+    app.event(ReactionRemovedEvent::class.java) { payload, ctx ->
         val event = payload.event
 
-        if(event.item.channel == System.getenv("SLACK_THANKS_CHANNEL")){
+        if (event.item.channel == System.getenv("SLACK_THANKS_CHANNEL")) {
             launch {
                 thankRepository.removeReaction(event)
             }

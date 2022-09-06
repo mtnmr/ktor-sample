@@ -14,14 +14,14 @@ fun Application.slackMessageEvent(
     userRepository: UserRepository
 ){
 
-    app.event(MessageEvent::class.java){ payload, ctx ->
+    app.event(MessageEvent::class.java) { payload, ctx ->
         val event = payload.event
 
-        if(event.channel == System.getenv("SLACK_THANKS_CHANNEL")){
+        if (event.channel == System.getenv("SLACK_THANKS_CHANNEL")) {
             launch {
                 thankRepository.createThankReply(event)
 
-                if(userRepository.getUser(event.user) == null){
+                if (userRepository.getUser(event.user) == null) {
                     val slackUsersInfo = userRepository.getSlackUsersInfo(event.user)
 
                     userRepository.createUser(
