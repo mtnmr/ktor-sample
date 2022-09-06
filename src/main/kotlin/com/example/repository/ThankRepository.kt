@@ -10,6 +10,7 @@ import com.slack.api.model.event.MessageEvent
 import com.slack.api.model.event.ReactionAddedEvent
 import com.slack.api.model.event.ReactionRemovedEvent
 import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 
 class ThankRepository {
 
@@ -62,6 +63,26 @@ class ThankRepository {
             ThanksTable.select {
                 ThanksTable.parentSlackPostId.isNull()
             }.orderBy(ThanksTable.id, SortOrder.DESC).map{ toThank(it)}
+        }
+    }
+
+    //定期実行で投稿するためのサンクスを取得する
+    suspend fun getPostThanks(): List<Thank>{
+        return dbQuery {
+            ThanksTable.select {
+                ThanksTable.slackPostId.isNull()
+            }.map { toThank(it) }
+        }
+    }
+
+    //slackPostIdを更新
+    suspend fun updateSlackPostId(ts:String, thank:Thank){
+        return dbQuery {
+            ThanksTable.update({
+                ThanksTable.id eq thank.id
+            }){
+                it[slackPostId] = ts
+            }
         }
     }
 }

@@ -1,15 +1,14 @@
 package com.example
 
-import com.example.module.slackCommand
-import com.example.module.slackMessageEvent
-import com.example.module.slackReactionEvent
-import com.example.module.slackViewSubmission
+import com.example.module.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import com.example.repository.DatabaseFactory
 import com.example.repository.ThankRepository
 import com.example.repository.UserRepository
 import com.example.route.thanksRouting
+import com.example.util.Every
+import com.example.util.TaskScheduler
 import com.slack.api.bolt.App
 import com.slack.api.bolt.AppConfig
 import com.slack.api.bolt.ktor.respond
@@ -22,6 +21,7 @@ import io.ktor.server.http.content.*
 import io.ktor.server.locations.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import java.util.concurrent.TimeUnit
 
 
 fun main() {
@@ -56,6 +56,12 @@ fun Application.module(testing:Boolean = false){
     slackViewSubmission(slackApp, thankRepository, userRepository)
     slackReactionEvent(slackApp, thankRepository)
     slackMessageEvent(slackApp, thankRepository, userRepository)
+
+    TaskScheduler{
+        sendPostThanksMessage(thankRepository)
+    }.start(
+        Every(5, TimeUnit.MINUTES)
+    )
 
     routing {
 //        get("/") {
