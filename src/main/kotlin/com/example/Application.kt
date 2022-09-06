@@ -6,6 +6,7 @@ import io.ktor.server.netty.*
 import com.example.repository.DatabaseFactory
 import com.example.repository.ThankRepository
 import com.example.repository.UserRepository
+import com.example.route.homeRouting
 import com.example.route.thanksDetailRouting
 import com.example.route.thanksRouting
 import com.example.util.Every
@@ -77,6 +78,7 @@ fun Application.module(testing:Boolean = false){
             resources("css")
         }
 
+        homeRouting()
         thanksRouting(thankRepository)
         thanksDetailRouting(thankRepository)
     }
