@@ -7,6 +7,16 @@ val hikaricp_version: String by project
 val postgres_version: String by project
 val slack_api_version: String by project
 
+//buildscript {
+//    repositories {
+//        mavenCentral()
+//    }
+//    dependencies {
+//        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
+//        classpath("org.jetbrains.kotlin:kotlin-serialization:$kotlin_version")
+//    }
+//}
+
 plugins {
     application
     kotlin("jvm") version "1.7.10"
@@ -24,9 +34,12 @@ application {
 
 repositories {
     mavenCentral()
+    maven { url = uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap") }
 }
 
+
 dependencies {
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version")
     implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
     implementation("io.ktor:ktor-serialization-gson-jvm:$ktor_version")
