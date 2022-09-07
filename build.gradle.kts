@@ -7,6 +7,12 @@ val hikaricp_version: String by project
 val postgres_version: String by project
 val slack_api_version: String by project
 
+/*
+herokuでbuildできなかった、これと同じっぽい
+Unable to build Ktor project with JDK 1.8
+https://youtrack.jetbrains.com/issue/KTOR-4800
+ */
+
 
 plugins {
     application
