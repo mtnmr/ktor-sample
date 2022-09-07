@@ -7,15 +7,6 @@ val hikaricp_version: String by project
 val postgres_version: String by project
 val slack_api_version: String by project
 
-//buildscript {
-//    repositories {
-//        mavenCentral()
-//    }
-//    dependencies {
-//        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
-//        classpath("org.jetbrains.kotlin:kotlin-serialization:$kotlin_version")
-//    }
-//}
 
 plugins {
     application
