@@ -59,3 +59,7 @@ dependencies {
     implementation("com.slack.api:bolt-servlet:$slack_api_version")
     implementation("com.slack.api:bolt-jetty:$slack_api_version")
 }
+
+tasks {
+    create("stage").dependsOn("installDist")
+}

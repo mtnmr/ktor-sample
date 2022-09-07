@@ -28,14 +28,14 @@ import java.util.concurrent.TimeUnit
 
 fun main() {
 
-    DatabaseFactory.init()
-
-    embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
+    embeddedServer(Netty, port = System.getenv("PORT").toInt(), host = "0.0.0.0") {
         module()
     }.start(wait = true)
 }
 
 fun Application.module(testing:Boolean = false){
+
+    DatabaseFactory.init()
 
     install(Locations)
 
