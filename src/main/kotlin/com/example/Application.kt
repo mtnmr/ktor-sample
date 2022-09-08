@@ -17,25 +17,20 @@ import com.slack.api.bolt.ktor.respond
 import com.slack.api.bolt.ktor.toBoltRequest
 import com.slack.api.bolt.util.SlackRequestParser
 import freemarker.cache.ClassTemplateLoader
+import io.ktor.serialization.gson.*
 import io.ktor.server.application.*
 import io.ktor.server.freemarker.*
 import io.ktor.server.http.content.*
 import io.ktor.server.locations.*
+import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import java.util.concurrent.TimeUnit
 
-
-fun main() {
-
-    embeddedServer(Netty, port = System.getenv("PORT").toInt(), host = "0.0.0.0") {
-        module()
-    }.start(wait = true)
-}
+fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 fun Application.module(testing:Boolean = false){
 
-    DatabaseFactory.init()
 
     install(Locations)
 
@@ -43,6 +38,11 @@ fun Application.module(testing:Boolean = false){
         templateLoader = ClassTemplateLoader(this::class.java.classLoader, "templates")
     }
 
+    install(ContentNegotiation) {
+        gson()
+    }
+
+    DatabaseFactory.init()
     val thankRepository = ThankRepository()
     val userRepository = UserRepository()
 
